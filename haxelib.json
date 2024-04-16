@@ -1,0 +1,15 @@
+{
+  "name": "BytePack",
+  "url" : "https://github.com/",
+  "license": "MIT",
+  "tags": [],
+  "description": "",
+  "version": "1.0.0",
+  "releasenote": "",
+  "contributors": ["Rock"],
+  "dependencies": {
+    "openfl": "",
+    "crypto": ""
+  },
+  "classPath": ""
+}
