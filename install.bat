@@ -13,6 +13,6 @@ echo Complete!
 echo | set /p=Updating environment variables...
 setx bytepack "%_path%\" >nul
 call haxelib dev BytePack %_path% >nul
-call %ziptools%\bin\scripts\functions\pathman add %_path%bin\
+call tools\pathman add %_path%bin\ >nul 2>&1
 echo Complete!
 exit /b 0

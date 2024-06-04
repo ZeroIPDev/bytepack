@@ -21,8 +21,8 @@ md %~1\.bytepack
 exit /b 0
 
 :gen
-set OPENSSL_CONF=%ziptools%bin\openssl\openssl.cfg
-call %ziptools%\bin\openssl\openssl enc -aes-256-cbc -pass pass:%random%%random% -P -md sha1 >%bytepack%\out\aes.txt
+set OPENSSL_CONF=%bytepack%\tools\ssl\openssl.cfg
+call %bytepack%\tools\ssl\openssl enc -aes-256-cbc -pass pass:%random%%random% -P -md sha1 >%bytepack%\out\aes.txt
 call :setbpvars
 exit /b 0
 

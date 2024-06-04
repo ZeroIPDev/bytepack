@@ -6,11 +6,7 @@ An asset encryption/decryption toolchain for Haxe/OpenFL.
 
 1. Download and install [Visual Studio Community](https://visualstudio.microsoft.com/vs/community/); ensure you have the `Desktop development with C++` package enabled in the installer
 2. A working copy of the `ziptools` repo
-3. Download the required packages using `zip install [package]`:
-
-* `haxe`
-* `neko`
-
+3. Download and install [Haxe](https://haxe.org/download/); ensure both the Haxe and Neko components are selected during installation
 4. Download the required libraries using `haxelib install [library]`:
 
 * `openfl`
