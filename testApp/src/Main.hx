@@ -2,7 +2,7 @@ package;
 
 import openfl.display.Sprite;
 
-import com.zip.BytePack;
+import com.zeroip.BytePack;
 
 class Main extends Sprite
 {

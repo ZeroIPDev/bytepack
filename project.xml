@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="BytePack" package="com.zip.bytepack" version="1.0.0" company="ZIP" />
+	<meta title="BytePack" package="com.zeroip.bytepack" version="1.0.0" company="ZeroIP" />
 	<app main="Main" path="build" file="BytePack" />
 	<window hidden="true" />
 	

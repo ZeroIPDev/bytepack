@@ -2,7 +2,7 @@ package;
 
 import openfl.display.Sprite;
 
-import com.zip.asset.AssetFilesystem;
+import com.zeroip.asset.AssetFilesystem;
 
 class Main extends Sprite
 {

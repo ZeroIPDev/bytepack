@@ -1,6 +1,6 @@
-package com.zip;
+package com.zeroip;
 
-import com.zip.asset.Encryption;
+import com.zeroip.asset.Encryption;
 import haxe.macro.Compiler;
 import sys.FileSystem;
 import sys.io.File;
