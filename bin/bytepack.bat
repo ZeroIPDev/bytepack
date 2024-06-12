@@ -3,6 +3,7 @@ if "%~1" == "" goto :help
 if "%~1" == "-gen" goto :gen
 if "%~1" == "-pack" call :pack %~2
 if "%~1" == "-clean" call :clean %~2
+if "%~1" == "-template" call :template
 exit /b %errorlevel%
 
 :pack
@@ -32,6 +33,12 @@ for /f "delims=*" %%a in (%bytepack%\out\aes.txt) do (
 )
 set BYTEPACK_FLAGS=-Dbytepack -Dbp_key=%bp_key% -Dbp_iv=%bp_iv %
 exit /b 0
+
+:template
+echo | set /p=Creating template project...
+robocopy "%bytepack%\template" "%cd%" /e /nfl /ndl /njh /njs /nc /ns /np >nul
+echo OK
+exit /b %errorlevel%
 
 :help
 echo --bytepack--
