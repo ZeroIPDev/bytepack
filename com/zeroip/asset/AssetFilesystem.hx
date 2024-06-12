@@ -33,15 +33,16 @@ class AssetFilesystem
 
     public static function encryptAssets(files:Array<String>, key:String, iv:String, assetdir:String):Void {
         var encryption:Encryption = new Encryption(key, iv);
+        Sys.stdout().writeString("Encrypting files...\n");
         for(v in files) {
-            Sys.stdout().writeString("Encrypting " + v + "...");
+            Sys.stdout().writeString(v);
             var bytes = File.getBytes(assetdir + "\\" + v);
             var encrypted_file = encryption.encrypt(bytes);
             var encrypted_name = Bytes.ofString(v).toHex();
             var asset_path = assetdir + "\\.bytepack\\" + encrypted_name;
             File.saveBytes(asset_path, encrypted_file);
             if(FileSystem.exists(asset_path)) {
-                Sys.stdout().writeString("OK\n");
+                Sys.stdout().writeString(" OK\n");
             } else {
                 Sys.stdout().writeString("\nERROR! Asset could not be encrypted.");
                 break;
