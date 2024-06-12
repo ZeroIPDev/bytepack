@@ -1,15 +1,15 @@
 @echo off
 if "%~1" == "" goto :help
 if "%~1" == "-gen" goto :gen
+if "%~1" == "-pack" call :pack %~2
+if "%~1" == "-clean" call :clean %~2
+exit /b %errorlevel%
+
+:pack
 if not exist "%bytepack%\build\windows\bin\BytePack.exe" (
     echo ERROR: BytePack Utility not built!
     exit /b 1
 )
-if "%~1" == "-pack" call :pack %~2
-if "%~1" == "-clean" call :clean %~2
-exit /b 0
-
-:pack
 call :gen
 call :clean %~1
 call %bytepack%\build\windows\bin\BytePack -pack %~1 %bp_key% %bp_iv %
