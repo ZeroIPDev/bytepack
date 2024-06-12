@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Template" package="com.sample.template" version="1.0.0" company="Company Name" />
+	<app main="Main" path="build" file="Template" />
+	<window width="1280" height="720"/>
+	
+	<source path="src" rename="Source" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="BytePack" />
+	
+	<assets path="assets" include="*" if="debug" />
+	<assets path="assets/.bytepack" rename="assets" if="bytepack" />
+	
+	
+</project>
