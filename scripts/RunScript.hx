@@ -1,21 +1,29 @@
 package;
 
-import openfl.display.Sprite;
-
 import com.zeroip.asset.AssetFilesystem;
 
-class Main extends Sprite
+class RunScript
 {
-	public function new()
+	public static function main()
 	{
-		super();
-
 		var args = Sys.args();
+		var wd = args.pop();
+
+		try
+		{
+			Sys.setCwd(wd);
+		}
+		catch(e:Dynamic)
+		{
+			Sys.stdout().writeString("Cannot set directory to " + wd + "\n");
+		}
+
 		checkArgCmd(args);
 		Sys.exit(0);
 	}
 
-	private function checkArgCmd(args:Array<String>):Void {
+	private static function checkArgCmd(args:Array<String>)
+	{
 		switch(args[0]) {
 			case "-pack":
 				var asset_path = args[1];
@@ -24,7 +32,7 @@ class Main extends Sprite
 				var files = AssetFilesystem.getFilePaths(asset_path);
 				AssetFilesystem.encryptAssets(files, arg_key, arg_iv, asset_path);
 			default:
-				Sys.stdout().writeString("ERROR: Invalid command");
+				Sys.stdout().writeString("ERROR: Invalid command\n");
 		}
 	}
 }
