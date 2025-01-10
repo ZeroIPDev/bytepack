@@ -8,10 +8,9 @@
 	<source path="src" rename="Source" />
 	
 	<haxelib name="openfl" />
-	<haxelib name="BytePack" />
+	<haxelib name="bytepack" />
 	
-	<assets path="assets" include="*" if="debug" />
-	<assets path="assets/.bytepack" rename="assets" if="bytepack" />
-	
+	<assets path="assets/.bytepack" rename="assets" unless="noencrypt" />
+	<assets path="assets" exclude=".bytepack" if="noencrypt" />
 	
 </project>

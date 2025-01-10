@@ -6,11 +6,11 @@ import haxe.io.Bytes;
 import com.zeroip.asset.Encryption;
 
 class AssetFilesystem
-{   
+{
+
     public static function AssetFilesystem() {}
     
     public static function getFilePaths(path:String):Array<String> {
-        var IGNORE_FILES = [".gitignore"];
         var files = FileSystem.readDirectory(path);
         var files_final:Array<String> = new Array<String>();
         for(i in 0...files.length) {
@@ -24,7 +24,7 @@ class AssetFilesystem
                 }
                 files_final = files_final.concat(sub_files);
             }
-            else if(!IGNORE_FILES.contains(files[i])) {
+            else if(files[i].indexOf(".gitignore") == -1) {
                 files_final.push(files[i]);
             }
         }
@@ -33,10 +33,10 @@ class AssetFilesystem
 
     public static function encryptAssets(files:Array<String>, key:String, iv:String, assetdir:String):Void {
         var encryption:Encryption = new Encryption(key, iv);
-        Sys.stdout().writeString("Encrypting files...\n");
-        if(!FileSystem.exists(assetdir + "/.bytepack/")) FileSystem.createDirectory(assetdir + "/.bytepack/");
+        // encrypt
         for(v in files) {
-            Sys.stdout().writeString(v);
+            if(v.indexOf(".gitignore") > -1) continue;
+            Sys.stdout().writeString("Encrypting " + v + "...");
             var bytes = File.getBytes(assetdir + "/" + v);
             var encrypted_file = encryption.encrypt(bytes);
             var encrypted_name = Bytes.ofString(v).toHex();
@@ -49,5 +49,40 @@ class AssetFilesystem
                 break;
             }
         }
+    }
+
+    public static function clearAssets(assetdir:String)
+    {
+        var existing = FileSystem.readDirectory(assetdir + "/.bytepack/");
+        for(v in existing) {
+            if(v.indexOf(".gitignore") == -1) {
+                FileSystem.deleteFile(assetdir + "/.bytepack/" + v);
+                Sys.sleep(1);
+            }
+        }
+    }
+
+    public static function generatePassword():String
+    {
+        var buffer = "";
+        for (i in 0...18) {
+            // choose num / upper / lower
+            var bound = [0, 0];
+            var choice = Std.random(3);
+            switch(choice) {
+                case 0:
+                    bound[0] = 48;
+                    bound[1] = 10;
+                case 1:
+                    bound[0] = 65;
+                    bound[1] = 26;
+                case 2:
+                    bound[0] = 97;
+                    bound[1] = 26;
+            }
+            // generate next character
+            buffer += String.fromCharCode(bound[0] + Std.random(bound[1]+1));
+        }
+        return buffer;
     }
 }

@@ -19,7 +19,7 @@ class BytePack
     public static function BytePack() {}
 
     public static function init():Void {
-        #if bytepack
+        #if encrypt
         var arg_key = Compiler.getDefine("bp_key");
 		var arg_iv = Compiler.getDefine("bp_iv");
         encryption = new Encryption(arg_key, arg_iv);
@@ -28,14 +28,13 @@ class BytePack
 
     public static function getAsset(n:String, t:Int):Any {
         var asset_name = n;
-        asset_name = StringTools.replace(asset_name, "/", "\\");
         var asset_data:Bytes;
-        #if bytepack
-        asset_name = "assets\\" + Bytes.ofString(asset_name).toHex();
+        #if encrypt
+        asset_name = "assets/" + Bytes.ofString(asset_name).toHex();
         var encrypted_bytes = File.getBytes(asset_name);
         asset_data = encryption.decrypt(encrypted_bytes);
         #else
-        asset_name = "assets\\" + asset_name;
+        asset_name = "assets/" + asset_name;
         asset_data = File.getBytes(asset_name);
         #end
         //Cast type & return
