@@ -11,8 +11,8 @@
 	<haxelib name="bytepack" />
 
 	<section unless="noencrypt">
-		<postbuild cmd="cp -a -f assets/.bytepack/. ${app.path}/linux/bin/assets/" if="${project.target == linux}" />
-		<postbuild cmd="xcopy /y /q /i assets\.bytepack\* ${app.path}\windows\bin\assets\" if="${project.target == windows}" />
+		<postbuild cmd="cp -a -f assets/.bytepack/. ${app.path}/${project.target}/bin/assets/" if="${project.host == linux}" />
+		<postbuild cmd="xcopy /y /q /i assets\.bytepack\* ${app.path}\${project.target}\bin\assets\" if="${project.host == windows}" />
 	</section>
 	<assets path="assets" exclude=".bytepack" if="noencrypt" />
 	
