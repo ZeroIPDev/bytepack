@@ -1,9 +1,13 @@
 package;
 
-import com.zeroip.asset.AssetFilesystem;
+import sys.io.File;
+import sys.FileSystem;
 
 class RunScript
 {
+
+	public static var libdir = Sys.getCwd();
+
 	public static function main()
 	{
 		var args = Sys.args();
@@ -15,22 +19,40 @@ class RunScript
 		}
 		catch(e:Dynamic)
 		{
-			Sys.stdout().writeString("Cannot set directory to " + wd + "\n");
+			Sys.println("Cannot set directory to " + wd);
 		}
 
 		switch(args[0]) {
-			case "encrypt":
-				encrypt(args[1], args[2], args[3]);
+			case "template":
+				copy_template(args[1]);
 			default:
-				Sys.stdout().writeString("ERROR: Invalid command\n");
+				Sys.println("ERROR: Invalid command");
 		}
 		
 		Sys.exit(0);
 	}
 
-	private static function encrypt(asset_path:String, arg_key:String, arg_iv:String)
+	private static function copy_template(name:String)
 	{
-		var files = AssetFilesystem.getFilePaths(asset_path);
-		AssetFilesystem.encryptAssets(files, arg_key, arg_iv, asset_path);
+		if(FileSystem.exists(name) && FileSystem.isDirectory(name)) {
+			Sys.println("Directory '" + name + "' already exists. Aborting");
+			return;
+		}
+		Sys.print("Creating template project '" + name + "'...");
+		// create directories
+		FileSystem.createDirectory(name);
+		FileSystem.createDirectory(name + "/src");
+		FileSystem.createDirectory(name + "/assets");
+		// copy files
+		var template = libdir + "/template";
+		File.copy(template + "/Template.hxproj", name + "/" + name + ".hxproj");
+		File.copy(template + "/.gitignore", name + "/.gitignore");
+		File.copy(template + "/src/Main.hx", name + "/src/Main.hx");
+		File.copy(template + "/assets/.gitignore", name + "/assets/.gitignore");
+		// write project.xml
+		var project = File.getContent(template + "/project.xml");
+		project = StringTools.replace(project, "Template", name);
+		File.saveContent(name + "/project.xml", project);
+		Sys.print("OK\n");
 	}
 }
