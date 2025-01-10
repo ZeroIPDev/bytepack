@@ -1,12 +1,12 @@
 {
   "name": "BytePack",
   "url" : "https://github.com/",
-  "license": "MIT",
+  "license": "GPL",
   "tags": [],
-  "description": "",
+  "description": "An asset encryption/decryption & delivery system for OpenFL.",
   "version": "1.0.0",
   "releasenote": "",
-  "contributors": ["Rock"],
+  "contributors": ["CCC"],
   "dependencies": {
     "openfl": "",
     "crypto": ""
