@@ -1,4 +1,4 @@
-package com.zeroip.utils;
+package zeroip.utils;
 
 #if macro
 import haxe.macro.Compiler;
@@ -6,7 +6,7 @@ import haxe.macro.Context;
 
 import sys.io.File;
 
-import com.zeroip.asset.AssetFilesystem;
+import zeroip.asset.AssetFilesystem;
 
 class EncryptMacro
 {

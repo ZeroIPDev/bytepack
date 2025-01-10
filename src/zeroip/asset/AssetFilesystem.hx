@@ -1,9 +1,9 @@
-package com.zeroip.asset;
+package zeroip.asset;
 
 import sys.FileSystem;
 import sys.io.File;
 import haxe.io.Bytes;
-import com.zeroip.asset.Encryption;
+import zeroip.asset.Encryption;
 
 class AssetFilesystem
 {

@@ -1,4 +1,4 @@
-package com.zeroip.asset;
+package zeroip.asset;
 
 import haxe.crypto.Aes;
 import haxe.crypto.mode.*;

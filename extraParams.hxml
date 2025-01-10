@@ -1,1 +1,1 @@
---macro com.zeroip.utils.EncryptMacro.callEncrypt()
+--macro zeroip.utils.EncryptMacro.callEncrypt()
