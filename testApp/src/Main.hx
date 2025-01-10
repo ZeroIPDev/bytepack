@@ -16,5 +16,7 @@ class Main extends Sprite
 		addChild(pingas);
 		var pingas_sound:Sound = BytePack.getAsset("sound/pingas.ogg", BytePack.TYPE_SOUND);
 		pingas_sound.play();
+		var pingas_txt = BytePack.getAsset("text/pingas.txt", BytePack.TYPE_TEXT);
+		trace(pingas_txt);
 	}
 }

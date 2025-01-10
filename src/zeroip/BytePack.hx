@@ -18,6 +18,7 @@ class BytePack
     public static inline var TYPE_BYTES = 0;
     public static inline var TYPE_BITMAP = 1;
     public static inline var TYPE_SOUND = 2;
+    public static inline var TYPE_TEXT = 3;
 
     private static var encryption:Encryption;
 
@@ -52,6 +53,8 @@ class BytePack
             case TYPE_SOUND:
                 var buffer = AudioBuffer.fromBytes(asset_data);
                 return(Sound.fromAudioBuffer(buffer));
+            case TYPE_TEXT:
+                return asset_data.toString();
         }
         return null;
     }
