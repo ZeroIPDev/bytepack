@@ -16,8 +16,16 @@ class EncryptMacro
         return;
         #end
         var password = AssetFilesystem.generatePassword();
-        Sys.command("openssl enc -aes-256-cbc -pass pass:" + password + " -P -md sha512 -pbkdf2 >/tmp/aes.txt");
-        var txt = File.getContent("/tmp/aes.txt");
+        var system = Sys.systemName();
+        var txt:String;
+        if(system == "Windows") {
+            Sys.command("openssl enc -aes-256-cbc -pass pass:" + password + " -P -md sha512 -pbkdf2 >%tmp%/aes.txt");
+            var tmp = Sys.getEnv("tmp");
+            txt = File.getContent(tmp + "/aes.txt");
+        } else {
+            Sys.command("openssl enc -aes-256-cbc -pass pass:" + password + " -P -md sha512 -pbkdf2 >/tmp/aes.txt");
+            txt = File.getContent("/tmp/aes.txt");
+        }
         var arr = txt.split("\n");
         // identify each value and then set flags
         var salt = arr[0].split("=")[1];
