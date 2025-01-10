@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="TestApp" package="com.sample.testapp" version="1.0.0" company="Company Name" />
+	<meta title="TestApp" package="com.zeroip.testapp" version="1.0.0" company="ZeroIP" />
 	<app main="Main" path="build" file="TestApp" />
 	<window width="318" height="470"/>
 	
-	<source path="src" rename="Source" />
+	<source path="src" />
 	
 	<haxelib name="openfl" />
-	<haxelib name="BytePack" />
-	
-	<assets path="assets" include="*" if="debug" />
-	<assets path="assets/.bytepack" rename="assets" if="bytepack" />
-	
+	<haxelib name="bytepack" />
+
+	<section unless="noencrypt">
+		<postbuild cmd="cp -a -f assets/.bytepack/. ${app.path}/${project.target}/bin/assets/" if="${project.host == linux}" />
+		<postbuild cmd="xcopy /y /q /i assets\.bytepack\* ${app.path}\${project.target}\bin\assets\" if="${project.host == windows}" />
+	</section>
+	<assets path="assets" exclude=".bytepack" if="noencrypt" />
 	
 </project>

@@ -1,0 +1,2 @@
+-D no-deprecation-warnings
+--macro zeroip.utils.EncryptMacro.callEncrypt()
