@@ -53,12 +53,10 @@ class AssetFilesystem
 
     public static function clearAssets(assetdir:String)
     {
+        if(!FileSystem.exists(assetdir + "/.bytepack/")) FileSystem.createDirectory(assetdir + "/.bytepack/");
         var existing = FileSystem.readDirectory(assetdir + "/.bytepack/");
         for(v in existing) {
-            if(v.indexOf(".gitignore") == -1) {
-                FileSystem.deleteFile(assetdir + "/.bytepack/" + v);
-                Sys.sleep(1);
-            }
+            FileSystem.deleteFile(assetdir + "/.bytepack/" + v);
         }
     }
 
