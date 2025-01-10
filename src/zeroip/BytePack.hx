@@ -3,17 +3,21 @@ package zeroip;
 import zeroip.asset.Encryption;
 
 import haxe.macro.Compiler;
-import sys.FileSystem;
-import sys.io.File;
 import haxe.io.Bytes;
+
+import sys.io.File;
+
+import lime.media.AudioBuffer;
 
 import openfl.display.BitmapData;
 import openfl.display.Bitmap;
+import openfl.media.Sound;
 
 class BytePack
 {
     public static inline var TYPE_BYTES = 0;
     public static inline var TYPE_BITMAP = 1;
+    public static inline var TYPE_SOUND = 2;
 
     private static var encryption:Encryption;
 
@@ -45,6 +49,9 @@ class BytePack
             case TYPE_BITMAP:
                 var bitmap_data = BitmapData.fromBytes(asset_data);
                 return(new Bitmap(bitmap_data));
+            case TYPE_SOUND:
+                var buffer = AudioBuffer.fromBytes(asset_data);
+                return(Sound.fromAudioBuffer(buffer));
         }
         return null;
     }
