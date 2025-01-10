@@ -12,8 +12,8 @@ import openfl.display.Bitmap;
 
 class BytePack
 {
-
-    public static inline var TYPE_BITMAP = 1; 
+    public static inline var TYPE_BYTES = 0;
+    public static inline var TYPE_BITMAP = 1;
 
     private static var encryption:Encryption;
 
@@ -40,6 +40,8 @@ class BytePack
         #end
         //Cast type & return
         switch(t) {
+            case TYPE_BYTES:
+                return asset_data;
             case TYPE_BITMAP:
                 var bitmap_data = BitmapData.fromBytes(asset_data);
                 return(new Bitmap(bitmap_data));
