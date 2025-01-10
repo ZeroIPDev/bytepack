@@ -1,27 +1,54 @@
 # BytePack
+ An asset encryption/decryption & delivery system for OpenFL.
 
-An asset encryption/decryption toolchain for Haxe/OpenFL.
+## What is BytePack?
+BytePack is a library/toolchain that will protect your project assets with AES-256 encryption. New keys are generated automatically on each successful build and passed to the compiler, meaning you barely have to do any work to keep your assets secure!
 
-### Prerequisites
+BytePack is built with ease of use in mind, and tries to resemble the default OpenFL asset system. All that is required is you run `BytePack.init()` somewhere at the start of your program, and then use `BytePack.getAsset()` to load recognizable data types.
 
+```haxe
+import openfl.display.Sprite;
+import zeroip.BytePack;
+
+class Main extends Sprite
+{
+	public function new()
+	{
+		super();
+		BytePack.init();
+
+		var image = BytePack.getAsset("image.png", BytePack.TYPE_BITMAP);
+		addChild(image);
+	}
+}
+```
+
+Currently, only Windows/Linux are supported, both as target platforms and for compiler usage.
+
+## Prerequisites (Windows)
 1. Download and install [Visual Studio Community](https://visualstudio.microsoft.com/vs/community/); ensure you have the `Desktop development with C++` package enabled in the installer
 2. Download and install [Haxe](https://haxe.org/download/); ensure both the Haxe and Neko components are selected during installation
-3. Download the required libraries using `haxelib install [library]`:
+3. Install [OpenSSL binaries](https://slproweb.com/products/Win32OpenSSL.html) (the Win64 OpenSSL *full* package is recommended, not light); afterwards you will need to add the `bin` folder to your system path
+
+## Prerequisites (Linux)
+1. Download and install [Haxe](https://haxe.org/download/) using the preferred method for your distro
+2. Ensure openssl is installed by entering `openssl` from your terminal; search for instructions if it's not present
+
+## Installation
+1. Download the required libraries using `haxelib install [library]`:
 
 * `openfl`
 * `crypto`
 
-4. Enter `haxelib run openfl setup` to complete OpenFL installation
+2. Enter `haxelib run openfl setup` to complete OpenFL installation
+3. In the parent folder above this repo, enter `haxelib dev bytepack bytepack` to point Haxe to this directory
+4. From this repo, enter `cd scripts`, then `haxe run.hxml` to compile the runtime script
 
-### Installation
-
-1. Enter `install` from the root of this repo to setup required environment variables; a restart of your terminal is recommended before continuing to step 2
-2. Enter `build` to compile the toolchain application; this will take several minutes
-
-### Testing
-
+## Testing
 A simple test app is available to ensure everything is working as intended post-installation.
 
-1. Enter `cd testApp` followed by `build` to compile the application; this will take several minutes
-2. Once completed, you should be able to enter `build\windows\bin` and run `TestApp.exe`
-3. The application should launch and display a bitmap
+1. From this repo, enter `cd testApp`, then `openfl test linux` or `openfl test windows` to compile & launch
+3. After building, the application should start; it will display a bitmap, play a sound, and trace some text in the terminal window
+
+## Creating a new project
+If you wish to get started on your own project, simply enter `haxelib run bytepack template [name]`. This will create a directory with all the required project files already setup.
