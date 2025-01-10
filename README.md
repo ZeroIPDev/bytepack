@@ -48,7 +48,11 @@ Currently, only Windows/Linux are supported, both as target platforms and for co
 A simple test app is available to ensure everything is working as intended post-installation.
 
 1. From this repo, enter `cd testApp`, then `openfl test linux` or `openfl test windows` to compile & launch
-3. After building, the application should start; it will display a bitmap, play a sound, and trace some text in the terminal window
+2. After building, the application should start; it will display a bitmap, play a sound, and trace some text in the terminal window
 
-## Creating a new project
-If you wish to get started on your own project, simply enter `haxelib run bytepack template [name]`. This will create a directory with all the required project files already setup.
+## Usage
+To get started on your own project, enter `haxelib run bytepack template [name]`. This will create a directory with all the required project files already setup.
+
+Any additional files placed inside `assets` will automatically be encrypted at compile time. Please note additional asset folders, or changing the asset folder name/location are not currently supported. Nested folders *inside* `assets` work as intended.
+
+If you wish to skip encryption, for example while compiling debug builds, simply add `noencrypt` as a flag for the compiler.
