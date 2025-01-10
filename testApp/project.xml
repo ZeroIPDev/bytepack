@@ -12,5 +12,9 @@
 	
 	<assets path="assets/.bytepack" rename="assets" unless="noencrypt" />
 	<assets path="assets" exclude=".bytepack" if="noencrypt" />
+
+	<section unless="noencrypt">
+		<postbuild cmd="cp -a -f assets/.bytepack/. ${app.path}/${project.target}/bin/assets/" if="${project.target == linux}" />
+	</section>
 	
 </project>
