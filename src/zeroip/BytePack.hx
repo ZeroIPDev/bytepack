@@ -5,10 +5,12 @@ import zeroip.asset.Encryption;
 import haxe.macro.Compiler;
 import haxe.io.Bytes;
 
-import sys.io.File;
-
 import lime.media.AudioBuffer;
 
+import openfl.filesystem.File;
+import openfl.filesystem.FileStream;
+import openfl.filesystem.FileMode;
+import openfl.utils.ByteArray;
 import openfl.display.BitmapData;
 import openfl.display.Bitmap;
 import openfl.media.Sound;
@@ -34,14 +36,23 @@ class BytePack
 
     public static function getAsset(n:String, t:Int):Any {
         var asset_name = n;
-        var asset_data:Bytes;
+        var asset_file:File;
+        var asset_data:ByteArray = new ByteArray();
+        var stream:FileStream = new FileStream();
         #if encrypt
+        var encrypted_bytes:ByteArray = new ByteArray();
         asset_name = "assets/" + Bytes.ofString(asset_name).toHex();
-        var encrypted_bytes = File.getBytes(asset_name);
+        asset_file = File.applicationDirectory.resolvePath(asset_name);
+        stream.open(asset_file, FileMode.READ);
+        stream.readBytes(encrypted_bytes, 0, stream.bytesAvailable);
+        stream.close();
         asset_data = encryption.decrypt(encrypted_bytes);
         #else
         asset_name = "assets/" + asset_name;
-        asset_data = File.getBytes(asset_name);
+        asset_file = File.applicationDirectory.resolvePath(asset_name);
+        stream.open(asset_file, FileMode.READ);
+        stream.readBytes(asset_data, 0, stream.bytesAvailable);
+        stream.close();
         #end
         //Cast type & return
         switch(t) {
