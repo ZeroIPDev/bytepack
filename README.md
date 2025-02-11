@@ -22,15 +22,22 @@ class Main extends Sprite
 	}
 }
 ```
+## Compatibility
+| Platform | Support                                      |
+| -------- | -------------------------------------------- |
+| Windows  | :white_check_mark: Fully Supported |
+| Linux    | :white_check_mark: Fully Supported |
+| Mac      | :ballot_box_with_check: Supported (Untested) |
+| HTML5    | :x: Not Supported |
 
-Currently, only Windows/Linux are supported, both as target platforms and for compiler usage.
+:warning: Please note Mac support is provided but not tested. Please report an issue if it's not working so we can fix it!
 
 ## Prerequisites (Windows)
 1. Download and install [Visual Studio Community](https://visualstudio.microsoft.com/vs/community/); ensure you have the `Desktop development with C++` package enabled in the installer
 2. Download and install [Haxe](https://haxe.org/download/); ensure both the Haxe and Neko components are selected during installation
 3. Install [OpenSSL binaries](https://slproweb.com/products/Win32OpenSSL.html) (the Win64 OpenSSL *full* package is recommended, not light); afterwards you will need to add the `bin` folder to your system path
 
-## Prerequisites (Linux)
+## Prerequisites (Linux/Mac)
 1. Download and install [Haxe](https://haxe.org/download/) using the preferred method for your distro
 2. Ensure openssl is installed by entering `openssl` from your terminal; search for instructions if it's not present
 

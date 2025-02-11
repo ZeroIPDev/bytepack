@@ -12,6 +12,7 @@
 	
 	<section unless="noencrypt">
 		<postbuild cmd="cp -a -f assets/.bytepack/. ${app.path}/${project.target}/bin/assets/" if="${project.host == linux}" />
+		<postbuild cmd="cp -p -f assets/.bytepack/* ${app.path}/${project.target}/bin/assets/" if="${project.host == mac}" />
 		<postbuild cmd="xcopy /y /q /i assets\.bytepack\* ${app.path}\${project.target}\bin\assets\" if="${project.host == windows}" />
 	</section>
 	<assets path="assets" exclude=".bytepack" if="noencrypt" />	
