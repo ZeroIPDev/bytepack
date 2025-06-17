@@ -4,6 +4,7 @@ import zeroip.asset.Encryption;
 
 import haxe.macro.Compiler;
 import haxe.io.Bytes;
+import haxe.Exception;
 
 import lime.media.AudioBuffer;
 
@@ -22,6 +23,8 @@ class BytePack
     public static inline var TYPE_SOUND = 2;
     public static inline var TYPE_TEXT = 3;
 
+    public static inline var FILE_NOT_FOUND = "filenotfound";
+
     private static var encryption:Encryption;
 
     public static function BytePack() {}
@@ -39,17 +42,22 @@ class BytePack
         var asset_file:File;
         var asset_data:ByteArray = new ByteArray();
         var stream:FileStream = new FileStream();
+        // Get asset name and evaluate
+        #if encrypt
+        asset_name = "assets/" + Bytes.ofString(asset_name).toHex();
+        #else
+        asset_name = "assets/" + asset_name;
+        #end
+        asset_file = File.applicationDirectory.resolvePath(asset_name);
+        if(!asset_file.exists) throw new Exception(FILE_NOT_FOUND);
+        // Load asset data
         #if encrypt
         var encrypted_bytes:ByteArray = new ByteArray();
-        asset_name = "assets/" + Bytes.ofString(asset_name).toHex();
-        asset_file = File.applicationDirectory.resolvePath(asset_name);
         stream.open(asset_file, FileMode.READ);
         stream.readBytes(encrypted_bytes, 0, stream.bytesAvailable);
         stream.close();
         asset_data = encryption.decrypt(encrypted_bytes);
         #else
-        asset_name = "assets/" + asset_name;
-        asset_file = File.applicationDirectory.resolvePath(asset_name);
         stream.open(asset_file, FileMode.READ);
         stream.readBytes(asset_data, 0, stream.bytesAvailable);
         stream.close();
