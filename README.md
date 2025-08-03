@@ -42,14 +42,10 @@ class Main extends Sprite
 2. Ensure openssl is installed by entering `openssl` from your terminal; search for instructions if it's not present
 
 ## Installation
-1. Download the required libraries using `haxelib install [library]`:
-
-* `openfl`
-* `crypto`
-
+1. Download the required libraries using `haxelib install requirements.hxml` from this repo
 2. Enter `haxelib run openfl setup` to complete OpenFL installation
-3. In the parent folder above this repo, enter `haxelib dev bytepack bytepack` to point Haxe to this directory
-4. From this repo, enter `cd scripts`, then `haxe run.hxml` to compile the runtime script
+3. Next, enter `haxelib dev bytepack .` to point Haxe to this directory
+4. Finally, enter `cd scripts && haxe run.hxml` to compile the runtime script
 
 ## Testing
 A simple test app is available to ensure everything is working as intended post-installation.
