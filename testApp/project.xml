@@ -3,18 +3,18 @@
 	
 	<meta title="TestApp" package="com.zeroip.testapp" version="1.0.0" company="ZeroIP" />
 	<app main="Main" path="build" file="TestApp" />
-	<window width="318" height="470"/>
+	<window width="318" height="470" />
 	
 	<source path="src" />
 	
 	<haxelib name="openfl" />
 	<haxelib name="bytepack" />
 
-	<section unless="noencrypt">
+	<assets path="assets" exclude=".bytepack" unless="encrypt" />
+	<section if="encrypt">
 		<postbuild cmd="cp -a -f assets/.bytepack/. ${app.path}/${project.target}/bin/assets/" if="${project.host == linux}" />
 		<postbuild cmd="cp -p -f assets/.bytepack/* ${app.path}/${project.target}/bin/assets/" if="${project.host == mac}" />
 		<postbuild cmd="xcopy /y /q /i assets\.bytepack\* ${app.path}\${project.target}\bin\assets\" if="${project.host == windows}" />
 	</section>
-	<assets path="assets" exclude=".bytepack" if="noencrypt" />
 	
 </project>

@@ -12,9 +12,7 @@ class EncryptMacro
 {
     public static function callEncrypt()
     {
-        #if noencrypt
-        return;
-        #end
+        #if encrypt
         var password = AssetFilesystem.generatePassword();
         var system = Sys.systemName();
         var txt:String;
@@ -31,13 +29,13 @@ class EncryptMacro
         var salt = arr[0].split("=")[1];
         var key = arr[1].split("=")[1];
         var iv = arr[2].split("=")[1];
-        Compiler.define("encrypt");
         Compiler.define("bp_key", key);
         Compiler.define("bp_iv", iv);
         // call asset encryption
         AssetFilesystem.clearAssets("assets");
         var files = AssetFilesystem.getFilePaths("assets");
         AssetFilesystem.encryptAssets(files, key, iv, "assets");
+        #end
     }
 }
 #end

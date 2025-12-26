@@ -2,7 +2,7 @@
  An asset encryption/decryption & delivery system for OpenFL.
 
 ## What is BytePack?
-BytePack is a library/toolchain that will protect your project assets with AES-256 encryption. New keys are generated automatically on each successful build and passed to the compiler, meaning you barely have to do any work to keep your assets secure!
+BytePack is a library/toolchain that can help protect your project assets with AES-256 encryption. New keys are generated automatically on each successful build and passed to the compiler, meaning you barely have to do any work to keep your assets secure!
 
 BytePack is built with ease of use in mind, and tries to resemble the default OpenFL asset system. All that is required is you run `BytePack.init()` somewhere at the start of your program, and then use `BytePack.getAsset()` to load recognizable data types.
 
@@ -50,12 +50,10 @@ class Main extends Sprite
 ## Testing
 A simple test app is available to ensure everything is working as intended post-installation.
 
-1. From this repo, enter `cd testApp`, then `openfl test linux` or `openfl test windows` to compile & launch
+1. From this repo, enter `cd testApp`, then `openfl test linux -Dencrypt` or `openfl test windows -Dencrypt` to compile & launch
 2. After building, the application should start; it will display a bitmap, play a sound, and trace some text in the terminal window
 
 ## Usage
 To get started on your own project, enter `haxelib run bytepack template [name]`. This will create a directory with all the required project files already setup.
 
-Any additional files placed inside `assets` will automatically be encrypted at compile time. Please note additional asset folders, or changing the asset folder name/location are not currently supported. Nested folders *inside* `assets` work as intended.
-
-If you wish to skip encryption, for example while compiling debug builds, simply add `noencrypt` as a flag for the compiler.
+Any additional files placed inside `assets` can be encrypted at compile time by adding the `encrypt` flag during compilation. Please note additional asset folders, or changing the asset folder name/location are not currently supported. Nested folders *inside* `assets` work as intended.
