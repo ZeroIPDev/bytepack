@@ -3,7 +3,7 @@ package;
 import sys.io.File;
 import sys.FileSystem;
 
-class RunScript
+class Run
 {
 
 	public static var libdir = Sys.getCwd();

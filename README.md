@@ -45,7 +45,6 @@ class Main extends Sprite
 1. Download the required libraries using `haxelib install requirements.hxml` from this repo
 2. Enter `haxelib run openfl setup` to complete OpenFL installation
 3. Next, enter `haxelib dev bytepack .` to point Haxe to this directory
-4. Finally, enter `cd scripts && haxe run.hxml` to compile the runtime script
 
 ## Testing
 A simple test app is available to ensure everything is working as intended post-installation.
