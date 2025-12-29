@@ -7,7 +7,6 @@ import zeroip.asset.Encryption;
 
 class AssetFilesystem
 {
-
     public static function AssetFilesystem() {}
     
     public static function getFilePaths(path:String):Array<String> {
@@ -33,19 +32,19 @@ class AssetFilesystem
 
     public static function encryptAssets(files:Array<String>, key:String, iv:String, assetdir:String):Void {
         var encryption:Encryption = new Encryption(key, iv);
-        // encrypt
+        Sys.println("Encrypting assets:");
         for(v in files) {
             if(v.indexOf(".gitignore") > -1) continue;
-            Sys.stdout().writeString("Encrypting " + v + "...");
+            Sys.print(v);
             var bytes = File.getBytes(assetdir + "/" + v);
             var encrypted_file = encryption.encrypt(bytes);
             var encrypted_name = Bytes.ofString(v).toHex();
             var asset_path = assetdir + "/.bytepack/" + encrypted_name;
             File.saveBytes(asset_path, encrypted_file);
             if(FileSystem.exists(asset_path)) {
-                Sys.stdout().writeString(" OK\n");
+                Sys.print(" OK\n");
             } else {
-                Sys.stdout().writeString("\nERROR! Asset could not be encrypted.\n");
+                Sys.print("\nERROR! Asset could not be encrypted.\n");
                 break;
             }
         }
