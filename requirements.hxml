@@ -1,2 +1,3 @@
 --library openfl
 --library crypto
+--class-path src
