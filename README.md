@@ -4,7 +4,7 @@
 ## What is BytePack?
 BytePack is a library/toolchain that can help protect your project assets with AES-256 encryption. New keys are generated automatically on each successful build and passed to the compiler, meaning you barely have to do any work to keep your assets secure!
 
-BytePack is built with ease of use in mind, and tries to resemble the default OpenFL asset system. All that is required is you run `BytePack.init()` somewhere at the start of your program, and then use `BytePack.getAsset()` to load recognizable data types.
+BytePack is built with ease of use in mind, and tries to resemble the default OpenFL asset system. All that is required is to use `BytePack.getAsset()` to load recognizable data types.
 
 ```haxe
 import openfl.display.Sprite;
@@ -15,8 +15,6 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
-		BytePack.init();
-
 		var image = BytePack.getAsset("image.png", BytePack.TYPE_BITMAP);
 		addChild(image);
 	}
